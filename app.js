@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 
 const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
 
 const Campground = require("./models/campground");
 
@@ -92,8 +93,13 @@ app.delete(
   })
 );
 
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
+
 app.use((err, req, res, next) => {
-  res.send("OH BOY ! Something went wrong");
+  const { statusCode = 500, message = "Something went wrong" } = err;
+  res.status(statusCode).send(message);
 });
 
 app.listen(3000, () => {
