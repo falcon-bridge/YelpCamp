@@ -27,10 +27,19 @@ const seedDB = async () => {
       author: "627125d4191b9413a1a607b8", //all the campgrounds belong to the use named "falcon" in the local database
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: "https://source.unsplash.com/collection/483251",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!",
       price,
+      images: [
+        {
+          url: "https://res.cloudinary.com/drqoblmxe/image/upload/v1651686945/YelpCamp/wv2irz6ywkngj45l3ggl.jpg",
+          filename: "YelpCamp/wv2irz6ywkngj45l3ggl",
+        },
+        {
+          url: "https://res.cloudinary.com/drqoblmxe/image/upload/v1651686944/YelpCamp/ty2rojcrabhja2cw4xhb.jpg",
+          filename: "YelpCamp/ty2rojcrabhja2cw4xhb",
+        },
+      ],
     });
     await camp.save();
   }
