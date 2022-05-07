@@ -13,6 +13,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const User = require("./models/user");
 
@@ -51,6 +52,12 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
 
 //for parsing the request body
 app.use(express.urlencoded({ extended: true }));
