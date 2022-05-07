@@ -14,6 +14,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 
 const User = require("./models/user");
 
@@ -60,6 +61,8 @@ app.use(
     replaceWith: "_",
   })
 );
+
+app.use(helmet({ contentSecurityPolicy: false }));
 
 //for parsing the request body
 app.use(express.urlencoded({ extended: true }));
